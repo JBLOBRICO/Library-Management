@@ -90,7 +90,7 @@ public class BookService
                 Name = "Harper Lee",
                 Biography = "American novelist best known for To Kill a Mockingbird.",
                 BirthDate = new DateTime(1926, 4, 28),
-                ProfileImageUrl = "https://example.com/harper.jpg",
+                ProfileImageUrl = "",
                 Books = new List<Book>()
             },
             Book = new Book
@@ -102,7 +102,7 @@ public class BookService
                 Genre = "Classic",
                 PublishedDate = new DateTime(1960, 7, 11)
             },
-            Cover = "https://images-na.ssl-images-amazon.com/images/I/81OdwZG5SSL.jpg"
+            Cover = ""
         },
         new {
             Author = new Author
@@ -111,7 +111,7 @@ public class BookService
                 Name = "J.R.R. Tolkien",
                 Biography = "English writer, poet, philologist, and academic.",
                 BirthDate = new DateTime(1892, 1, 3),
-                ProfileImageUrl = "https://example.com/tolkien.jpg",
+                ProfileImageUrl = "",
                 Books = new List<Book>()
             },
             Book = new Book
@@ -123,7 +123,7 @@ public class BookService
                 Genre = "Fantasy",
                 PublishedDate = new DateTime(1937, 9, 21)
             },
-            Cover = "https://m.media-amazon.com/images/I/81t2CVWEsUL.jpg"
+            Cover = ""
         },
         new {
             Author = new Author
@@ -132,7 +132,7 @@ public class BookService
                 Name = "F. Scott Fitzgerald",
                 Biography = "American novelist and short story writer.",
                 BirthDate = new DateTime(1896, 9, 24),
-                ProfileImageUrl = "https://example.com/fitzgerald.jpg",
+                ProfileImageUrl = "",
                 Books = new List<Book>()
             },
             Book = new Book
@@ -144,7 +144,7 @@ public class BookService
                 Genre = "Classic",
                 PublishedDate = new DateTime(1925, 4, 10)
             },
-            Cover = "https://m.media-amazon.com/images/I/81af+MCATTL.jpg"
+            Cover = ""
         },
         new {
             Author = new Author
@@ -153,7 +153,7 @@ public class BookService
                 Name = "Suzanne Collins",
                 Biography = "American television writer and author.",
                 BirthDate = new DateTime(1962, 8, 10),
-                ProfileImageUrl = "https://example.com/collins.jpg",
+                ProfileImageUrl = "",
                 Books = new List<Book>()
             },
             Book = new Book
@@ -165,7 +165,7 @@ public class BookService
                 Genre = "Dystopian",
                 PublishedDate = new DateTime(2008, 9, 14)
             },
-            Cover = "https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg"
+            Cover = ""
         },
         new {
             Author = new Author
@@ -186,7 +186,7 @@ public class BookService
                 Genre = "Horror",
                 PublishedDate = new DateTime(1818, 1, 1)
             },
-            Cover = "https://m.media-amazon.com/images/I/81Fhc2wAE0L.jpg"
+            Cover = ""
         }
     };
 

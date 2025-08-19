@@ -64,92 +64,90 @@
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        function openEditModal(bookId) {
-            fetch(`/Book/EditModal?id=${encodeURIComponent(bookId)}`)
-                .then(response => {
-                    if (!response.ok) throw new Error('Error loading edit form.');
-                    return response.text();
-                })
-                .then(html => {
-                    document.querySelector('#exampleModal .modal-content').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('exampleModal')).show();
-                })
-                .catch(error => {
-                    alert(error.message);
-                    console.error(error);
-                });
+<script>
+    function openEditModal(bookId) {
+        fetch(`/Book/EditModal?id=${encodeURIComponent(bookId)}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error loading edit form.');
+                return response.text();
+            })
+            .then(html => {
+                document.querySelector('#exampleModal .modal-content').innerHTML = html;
+                new bootstrap.Modal(document.getElementById('exampleModal')).show();
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
+    }
+
+    function openAddModal() {
+        fetch(`/Book/AddModal`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error loading add form.');
+                return response.text();
+            })
+            .then(html => {
+                document.querySelector('#exampleModal .modal-content').innerHTML = html;
+                new bootstrap.Modal(document.getElementById('exampleModal')).show();
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
+    }
+
+    document.addEventListener("submit", function (e) {
+        const form = e.target;
+        if (form.matches("#editBookForm") || form.matches("#AddBookForm")) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: form.method,
+                body: new URLSearchParams(formData)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                location.reload();
+            })
+            .catch(error => {
+                alert('Error saving changes: ' + error.message);
+            });
         }
+    });
 
-        function openAddModal() {
-            fetch(`/Book/AddModal`)
-                .then(response => {
-                    if (!response.ok) throw new Error('Error loading add form.');
-                    return response.text();
-                })
-                .then(html => {
-                    document.querySelector('#exampleModal .modal-content').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('exampleModal')).show();
-                })
-                .catch(error => {
-                    alert(error.message);
-                    console.error(error);
-                });
+    function openDeleteModal(bookId) {
+        fetch(`/Book/DeleteModal?id=${encodeURIComponent(bookId)}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error loading delete modal.');
+                return response.text();
+            })
+            .then(html => {
+                document.querySelector('#exampleModal .modal-content').innerHTML = html;
+                new bootstrap.Modal(document.getElementById('exampleModal')).show();
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
+    }
+
+    // Listen for Delete Button Click inside Modal
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.matches("#confirmDeleteBtn")) {
+            const bookId = e.target.getAttribute("data-id");
+
+            fetch(`/Book/Delete/${bookId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Error deleting book.');
+                location.reload(); // Refresh after delete
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
         }
-
-        document.addEventListener("submit", function (e) {
-            const form = e.target;
-            if (form.matches("#editBookForm") || form.matches("#AddBookForm")) {
-                e.preventDefault();
-                const formData = new FormData(form);
-                fetch(form.action, {
-                    method: form.method,
-                    body: new URLSearchParams(formData)
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    location.reload();
-                })
-                .catch(error => {
-                    alert('Error saving changes: ' + error.message);
-                });
-            }
-        });
-
-        function openDeleteModal(bookId) {
-            fetch(`/Book/DeleteModal?id=${encodeURIComponent(bookId)}`)
-                .then(response => {
-                    if (!response.ok) throw new Error('Error loading delete modal.');
-                    return response.text();
-                })
-                .then(html => {
-                    document.querySelector('#exampleModal .modal-content').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('exampleModal')).show();
-                })
-                .catch(error => {
-                    alert(error.message);
-                    console.error(error);
-                });
-        }
-
-        // ✅ FIXED: Confirm Delete Logic
-        document.addEventListener("click", function (e) {
-            if (e.target && e.target.matches("#confirmDeleteBtn")) {
-                const bookId = e.target.getAttribute("data-id");
-
-                fetch(`/Book/Delete/${bookId}`, {
-                    method: 'DELETE'
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Error deleting book.');
-                    location.reload();
-                })
-                .catch(error => {
-                    alert(error.message);
-                    console.error(error);
-                });
-            }
-        });
-    </script>
-}
+    });
+</script>
